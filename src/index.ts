@@ -5,6 +5,8 @@ import cors from 'cors';
 import indexRoutes from './routes/indexRoutes'
 import ejerciciosRoutes from './routes/ejerciciosRoutes';
 import musculosImplicadosRoutes from "./routes/musculosImplicadosRoutes";
+import tipoUsuarioRoutes from "./routes/tipo_usuarios";
+import usuariosRoutes from './routes/usuarios';
 
 class Server {
     public app: Application;
@@ -26,6 +28,8 @@ class Server {
         this.app.use('/',indexRoutes);
         this.app.use('/api/ejercicios',ejerciciosRoutes);
         this.app.use('/api/musculosImplicados',musculosImplicadosRoutes);
+        this.app.use('/api/tipoUsuario',tipoUsuarioRoutes);
+        this.app.use('/api/usuarios',usuariosRoutes);
     }
 
     start() : void {
