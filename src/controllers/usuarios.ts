@@ -52,8 +52,14 @@ class UsuariosController {
 
     public async delete(req:Request, res:Response): Promise<void>{
         const {id} = req.params;
-        await pool.query('DELETE from musculos_implicados WHERE ID_musculo = ?', [id]);
-        res.json({message: "Musculo eliminado"});
+        try {
+            await pool.query('DELETE from usuarios WHERE ID_usuario = ?', [id]);
+            res.json({message: "Usuario eliminado"});
+        } catch (error) {
+            res.status(404).json({msg: error});
+            console.log(error)
+        }
+        
     }
     public async update(req:Request, res:Response): Promise<void>{
         const {id} = req.params;

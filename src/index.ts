@@ -7,6 +7,7 @@ import ejerciciosRoutes from './routes/ejerciciosRoutes';
 import musculosImplicadosRoutes from "./routes/musculosImplicadosRoutes";
 import tipoUsuarioRoutes from "./routes/tipo_usuarios";
 import usuariosRoutes from './routes/usuarios';
+import datosUsuarioRoutes from './routes/datos_usuario';
 
 class Server {
     public app: Application;
@@ -30,6 +31,7 @@ class Server {
         this.app.use('/api/musculosImplicados',musculosImplicadosRoutes);
         this.app.use('/api/tipoUsuario',tipoUsuarioRoutes);
         this.app.use('/api/usuarios',usuariosRoutes);
+        this.app.use('/api/datosUsuario',datosUsuarioRoutes);
     }
 
     start() : void {
