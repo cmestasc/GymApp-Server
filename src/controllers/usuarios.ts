@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import bcrypt from 'bcrypt';
 import pool from '../database';
-import {generarJWT} from '../helpers/jwt'
 
 class UsuariosController {
     public async list (req: Request, res:Response) {
@@ -32,21 +31,18 @@ class UsuariosController {
         
     }
 
-
     public async create(req:Request, res:Response): Promise<void>{
         var {usuario, password} = req.body;
 
         const salt = bcrypt.genSaltSync();
         password = bcrypt.hashSync(password,salt)
 
-        const token = await generarJWT(usuario);
-
         const existe = await pool.query('SELECT * FROM usuarios WHERE usuario=?', [usuario])
         if(existe.length > 0) {
             res.status(404).json({msg: 'Ese usuario ya existe'});
         } else {
             await pool.query('INSERT INTO usuarios (usuario, password, ID_tipo_usuario) VALUES (?,?,?)', [usuario, password, 1])
-            res.json({msg: `Usuario almacenado correctamente`, token: token})
+            res.json({msg: `Usuario almacenado correctamente`})
         }
     }
 
