@@ -7,6 +7,9 @@ import ejerciciosRoutes from './routes/ejerciciosRoutes';
 import musculosImplicadosRoutes from "./routes/musculosImplicadosRoutes";
 import tipoUsuarioRoutes from "./routes/tipo_usuarios";
 import usuariosRoutes from './routes/usuarios';
+import logRoutes from './routes/log';
+import datosRutinaRoutes from './routes/datos_rutina';
+import datosLogRoutes from './routes/datos_log';
 import datosUsuarioRoutes from './routes/datos_usuario';
 
 class Server {
@@ -32,6 +35,9 @@ class Server {
         this.app.use('/api/tipoUsuario',tipoUsuarioRoutes);
         this.app.use('/api/usuarios',usuariosRoutes);
         this.app.use('/api/datosUsuario',datosUsuarioRoutes);
+        this.app.use('/api/datos_log',datosLogRoutes);
+        this.app.use('/api/datos_rutina',datosRutinaRoutes);
+        this.app.use('/api/log',logRoutes);
     }
 
     start() : void {
