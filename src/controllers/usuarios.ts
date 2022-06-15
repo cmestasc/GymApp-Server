@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import pool from '../database';
 
 class UsuariosController {
-    public async list (req: Request, res:Response) {
+    public async list (req: Request, res:Response): Promise<any>{
        const usuarios = await pool.query('SELECT * from usuarios');
         res.json(usuarios);
     }
