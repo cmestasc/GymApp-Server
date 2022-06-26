@@ -41,17 +41,29 @@ class UsuariosController {
         if(existe.length > 0) {
             res.status(404).json({msg: 'Ese usuario ya existe'});
         } else {
-            await pool.query('INSERT INTO usuarios (usuario, password, ID_tipo_usuario) VALUES (?,?,?)', [usuario, password, 1])
-            res.json({msg: `Usuario almacenado correctamente`})
+            await pool.query('INSERT INTO usuarios (usuario, password, ID_tipo_usuario) VALUES (?,?,?)', [usuario, password, 3])
+            var id = await pool.query('SELECT ID_usuario FROM usuarios WHERE usuario = ?', [usuario])
+            res.json({msg: `Usuario almacenado correctamente`, ID: `${id[0].ID_usuario}`})
         }
     }
 
-    public async delete(req:Request, res:Response): Promise<void>{
-        const {id} = req.params;
+    public async getID(req:Request, res:Response): Promise<void>{
+        var {usuario} = req.body;
         try {
-            await pool.query('DELETE from usuarios WHERE ID_usuario = ?', [id]);
+        var data = await pool.query('SELECT * FROM usuarios WHERE usuario = ?', [usuario])
+        res.json({usuario: `${data[0].usuario}`, ID_usuario: `${data[0].ID_usuario}`, ID_tipo_usuario: `${data[0].ID_tipo_usuario}`, password: `${data[0].password}`})
+    } catch (error) { 
+        res.status(404).json({msg: error});
+        console.log(error)
+    }
+    }
+
+    public async delete(req:Request, res:Response): Promise<void>{
+        const {ID_usuario} = req.body;
+        try {
+            await pool.query('DELETE from usuarios WHERE ID_usuario = ?', [ID_usuario]);
             res.json({message: "Usuario eliminado"});
-        } catch (error) {
+        } catch (error) { 
             res.status(404).json({msg: error});
             console.log(error)
         }

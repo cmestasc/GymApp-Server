@@ -3,7 +3,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes'
-import ejerciciosRoutes from './routes/ejerciciosRoutes';
 import musculosImplicadosRoutes from "./routes/musculosImplicadosRoutes";
 import tipoUsuarioRoutes from "./routes/tipo_usuarios";
 import usuariosRoutes from './routes/usuarios';
@@ -11,6 +10,10 @@ import logRoutes from './routes/log';
 import datosRutinaRoutes from './routes/datos_rutina';
 import datosLogRoutes from './routes/datos_log';
 import datosUsuarioRoutes from './routes/datos_usuario';
+import tipoRutinaRoutes from './routes/tipo_rutina';
+import equipamientoRoutes from './routes/equipamiento';
+import ejerciciosRoutes from './routes/ejercicios';
+import rutinasRoutes from './routes/rutinas';
 
 class Server {
     public app: Application;
@@ -38,6 +41,9 @@ class Server {
         this.app.use('/api/datos_log',datosLogRoutes);
         this.app.use('/api/datos_rutina',datosRutinaRoutes);
         this.app.use('/api/log',logRoutes);
+        this.app.use('/api/tipoRutina',tipoRutinaRoutes);
+        this.app.use('/api/equipamiento',equipamientoRoutes);
+        this.app.use('/api/rutinas',rutinasRoutes);
     }
 
     start() : void {

@@ -17,13 +17,22 @@ class DatosUsuarioController {
         }
     }
     public async create(req:Request, res:Response): Promise<void>{
-        await pool.query('INSERT INTO musculos_implicados set ?', [req.body])
-        res.json({text: `Músculo ${req.params.musculo} guardado`})
+        try {
+        await pool.query('INSERT INTO datos_usuario (nombre, apellidos, edad, peso, altura, ciudad, pais, email, ID_usuario) VALUES (?,?,?,?,?,?,?,?,?)', [req.body.nombre,req.body.apellidos,req.body.edad,req.body.peso,req.body.altura,req.body.ciudad,req.body.pais,req.body.email,req.body.ID_usuario])
+        res.json({text: `Datos de usuario guardados`})
+    } catch (error) {
+        res.status(404).json({msg: error})
+    }
     }
     public async delete(req:Request, res:Response): Promise<void>{
-        const {id} = req.params;
-        await pool.query('DELETE from musculos_implicados WHERE ID_musculo = ?', [id]);
-        res.json({message: "Musculo eliminado"});
+        const {ID_usuario} = req.body;
+        try {
+            await pool.query('DELETE from datos_usuario WHERE ID_usuario = ?', [ID_usuario]);
+            res.json({message: "Datos eliminados"});
+        } catch (error) { 
+            res.status(404).json({msg: error});
+            console.log(error)
+        }
     }
     public async update(req:Request, res:Response): Promise<void>{
         const {id} = req.params;

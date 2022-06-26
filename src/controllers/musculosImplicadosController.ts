@@ -12,6 +12,10 @@ class MusculosImplicadosController {
         const musculos = await pool.query('SELECT * FROM musculos_implicados WHERE ID_musculo = ?', [id]);
         musculos.length > 0 ? res.json(musculos[0]) : res.status(404).json({msg: "El musculo no existe"});
     }
+    public async getOneId (req: Request, res:Response): Promise<any> {
+        const musculos = await pool.query('SELECT * FROM musculos_implicados WHERE musculo = ?', [req.body.musculo]);
+        musculos.length > 0 ? res.json(musculos[0]) : res.status(404).json({msg: "El musculo no existe"});
+    }
     public async create(req:Request, res:Response): Promise<void>{
         await pool.query('INSERT INTO musculos_implicados set ?', [req.body])
         res.json({text: `Músculo ${req.params.musculo} guardado`})

@@ -16,11 +16,6 @@ class TipoUsuarioController {
         await pool.query('INSERT INTO musculos_implicados set ?', [req.body])
         res.json({text: `Músculo ${req.params.musculo} guardado`})
     }
-    public async delete(req:Request, res:Response): Promise<void>{
-        const {id} = req.params;
-        await pool.query('DELETE from musculos_implicados WHERE ID_musculo = ?', [id]);
-        res.json({message: "Musculo eliminado"});
-    }
     public async update(req:Request, res:Response): Promise<void>{
         const {id} = req.params;
         await pool.query('UPDATE musculos_implicados set ? WHERE ID_musculo = ?', [req.body, id]);

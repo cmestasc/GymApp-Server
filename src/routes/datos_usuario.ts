@@ -12,9 +12,9 @@ class DatosUsuarioRoutes {
     config(): void {
         this.router.get('/', datosUsuarioController.list);
         this.router.post('/', datosUsuarioController.getOne);
-        this.router.post('/:musculo', datosUsuarioController.create);
+        this.router.post('/insertDatos', datosUsuarioController.create);
         this.router.put('/:id', datosUsuarioController.update);
-        this.router.delete('/:id', datosUsuarioController.delete);
+        this.router.delete('/delete', datosUsuarioController.delete);
     }
 
 }

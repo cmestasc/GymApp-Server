@@ -14,7 +14,6 @@ class TipoUsuarioRoutes {
         this.router.get('/:id', tipoUsuarioController.getOne);
         this.router.post('/:musculo', tipoUsuarioController.create);
         this.router.put('/:id', tipoUsuarioController.update);
-        this.router.delete('/:id', tipoUsuarioController.delete);
     }
 
 }
