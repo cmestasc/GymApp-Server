@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { usuariosController } from '../controllers/usuarios';
+import { datosRutinaController } from '../controllers/datos_rutina';
 
 class DatosRutinaRoutes {
 
@@ -10,11 +11,11 @@ class DatosRutinaRoutes {
     }
 
     config(): void {
-        this.router.get('/', usuariosController.list);
-        this.router.post('/insertar', usuariosController.create);
-        this.router.post('/login', usuariosController.login);
-        this.router.put('/:id', usuariosController.update);
-        this.router.delete('/:id', usuariosController.delete);
+        this.router.post('/', datosRutinaController.listAll);
+        this.router.post('/rutina', datosRutinaController.listRutina);
+        this.router.post('/login', datosRutinaController.login);
+        this.router.put('/:id', datosRutinaController.update);
+        this.router.delete('/:id', datosRutinaController.delete);
     }
 
 }

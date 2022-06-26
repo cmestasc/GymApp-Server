@@ -4,9 +4,26 @@ import pool from '../database';
 import {generarJWT} from '../helpers/jwt'
 
 class DatosRutinaController {
-    public async list (req: Request, res:Response) {
-       const usuarios = await pool.query('SELECT * from usuarios');
-        res.json(usuarios);
+
+    public async listAll (req: Request, res:Response) {
+        try {
+       const datos = await pool.query('SELECT * from datos_rutina');
+        res.json(datos);
+        } catch (error) {
+            res.status(404).json({msg: error});
+            console.log(error)
+        }
+    }
+
+    public async listRutina (req: Request, res:Response) {
+        try {
+            const {ID_rutina} = req.body;
+            const datos = await pool.query('SELECT * from datos_rutina WHERE ID_rutina = ?', [ID_rutina]);
+            res.json(datos);
+        } catch (error) {
+            res.status(404).json({msg: error});
+            console.log(error)
+        }
     }
 
     public async login (req: Request, res:Response): Promise<any> {

@@ -13,6 +13,7 @@ class EjerciciosRoutes {
         this.router.post('/', ejerciciosController.getAll);
         this.router.post('/ejercicio', ejerciciosController.getDatosEjercicios);
         this.router.post('/create', ejerciciosController.create);
+        this.router.post('/delete', ejerciciosController.delete);
     }
 
 }

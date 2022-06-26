@@ -35,9 +35,14 @@ class DatosUsuarioController {
         }
     }
     public async update(req:Request, res:Response): Promise<void>{
-        const {id} = req.params;
-        await pool.query('UPDATE musculos_implicados set ? WHERE ID_musculo = ?', [req.body, id]);
-        res.json({message: "Musculo actualizado"});
+        try {
+            const {nombre, apellidos, edad, peso, altura, ciudad, pais, email, ID_usuario} = req.body;
+            const update = await pool.query('UPDATE datos_usuario set ?, ?, ?, ?, ?, ?, ?, ? WHERE ?', [{nombre}, {apellidos}, {edad}, {peso}, {altura}, {ciudad}, {pais}, {email}, {ID_usuario}]);
+            res.json({msg: "Datos actualizados correctamente"});
+        } catch (error) { 
+            res.status(404).json({msg: error});
+            console.log(error)
+        }
     }
 
 }
